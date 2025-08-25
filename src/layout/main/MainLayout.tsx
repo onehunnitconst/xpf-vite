@@ -1,19 +1,42 @@
 import { Button } from "@/components/ui/button";
+import { paths } from "@/paths";
+import { useCallback } from "react";
+import { useNavigate } from "react-router";
 
 type MainLayoutProps = {
   children: React.ReactNode;
 };
 
 export default function MainLayout({ children }: MainLayoutProps) {
+  const navigate = useNavigate();
+
+  const handleHomeButtonClick = useCallback(() => {
+    navigate(paths.home);
+  }, [navigate]);
+
+  const handleProfileButtonClick = useCallback(() => {
+    navigate(paths.profile);
+  }, [navigate]);
+
+  const handleLoginButtonClick = useCallback(() => {
+    navigate(paths.login);
+  }, [navigate]);
+
   return (
     <div className="w-full h-full flex flex-col">
       <div className="w-full h-12 border-b border-gray-200 flex justify-center sticky top-0 z-10 bg-background">
         <div className="min-w-3xl flex flex-row items-center justify-between">
           <p className="text-sm font-bold">XPF Beta</p>
           <div className="flex flex-row items-center justify-center gap-2">
-            <Button variant="link">홈</Button>
-            <Button variant="link">내 프로필</Button>
-            <Button variant="link">로그인</Button>
+            <Button variant="link" onClick={handleHomeButtonClick}>
+              홈
+            </Button>
+            <Button variant="link" onClick={handleProfileButtonClick}>
+              내 프로필
+            </Button>
+            <Button variant="link" onClick={handleLoginButtonClick}>
+              로그인
+            </Button>
           </div>
         </div>
       </div>

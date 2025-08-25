@@ -12,7 +12,7 @@ export default function LoginView() {
       const id = formData.get("id");
       const password = formData.get("password");
       console.log(id, password);
-      navigate(paths.main);
+      navigate(paths.home);
     },
     [navigate]
   );
