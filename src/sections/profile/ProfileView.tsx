@@ -55,7 +55,7 @@ export default function ProfileView() {
               {Array.from({ length: 10 }).map((_, index) => (
                 <div
                   key={index}
-                  className="flex flex-row gap-4 max-w-3xl bg-gray-100 rounded-lg p-4"
+                  className="flex flex-row gap-4 max-w-3xl bg-gray-100 rounded-lg p-4 hover:bg-gray-200 hover:cursor-pointer"
                 >
                   <Avatar className="w-24 h-24 rounded-lg">
                     <AvatarImage src="https://github.com/shadcn.png" />
