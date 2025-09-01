@@ -14,6 +14,28 @@ export default function BasicProfileSection() {
 
   const [nicknameEditModeOpen, setNicknameEditModeOpen] = useState(false);
 
+  const handleChangeProfileImage = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      event.preventDefault();
+      const file = event.target.files?.[0];
+      if (file) {
+        console.log(file);
+      }
+    },
+    []
+  );
+
+  const handleChangeHeaderImage = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      event.preventDefault();
+      const file = event.target.files?.[0];
+      if (file) {
+        console.log(file);
+      }
+    },
+    []
+  );
+
   const handleClickNicknameEditModeOpen = useCallback(
     (event: React.MouseEvent<HTMLDivElement>) => {
       event.preventDefault();
@@ -38,12 +60,21 @@ export default function BasicProfileSection() {
           alt="profile"
           className="w-full h-48 object-cover z-1"
         />
-        <div className="absolute top-0 left-0 w-full h-full bg-gray-900/35 rounded-lg z-2" />
+        <div className="absolute top-0 left-0 w-full h-full bg-gray-900/50 rounded-lg z-2" />
         <div className="absolute bottom-2 right-2 flex flex-row gap-2 z-3">
-          <div className="bg-gray-800/65 hover:bg-gray-800/85 rounded-full p-2 hover:cursor-pointer z-3">
-            <CameraIcon className="w-6 h-6 text-gray-100" />
-          </div>
-          <div className="bg-gray-800/65 hover:bg-gray-800/85 rounded-full p-2 hover:cursor-pointer z-3">
+          <input
+            id="header-image-input"
+            type="file"
+            accept="image/*"
+            onChange={handleChangeHeaderImage}
+            className="hidden"
+          />
+          <label htmlFor="header-image-input">
+            <div className="bg-gray-800/65 hover:bg-gray-800/85 rounded-full p-2 hover:cursor-pointer">
+              <CameraIcon className="w-6 h-6 text-gray-100" />
+            </div>
+          </label>
+          <div className="bg-gray-800/65 hover:bg-gray-800/85 rounded-full p-2 hover:cursor-pointer">
             <XIcon className="w-6 h-6 text-gray-100" />
           </div>
         </div>
@@ -56,9 +87,18 @@ export default function BasicProfileSection() {
               <AvatarImage src="https://github.com/shadcn.png" />
             </Avatar>
             <div className="absolute top-0 left-0 w-full h-full bg-gray-900/35 rounded-lg z-12" />
-            <div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] bg-gray-800/75 hover:bg-gray-800/85 rounded-full p-2 hover:cursor-pointer z-13">
-              <CameraIcon className="w-6 h-6 text-gray-100" />
-            </div>
+            <input
+              id="profile-image-input"
+              type="file"
+              accept="image/*"
+              onChange={handleChangeProfileImage}
+              className="hidden"
+            />
+            <label htmlFor="profile-image-input">
+              <div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] bg-gray-800/75 hover:bg-gray-800/85 rounded-full p-2 hover:cursor-pointer z-13">
+                <CameraIcon className="w-6 h-6 text-gray-100" />
+              </div>
+            </label>
           </div>
           <div className="flex flex-col gap-1 items-center">
             {!nicknameEditModeOpen && (
