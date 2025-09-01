@@ -3,7 +3,7 @@ import CardSection from "./sub-section/CardSection";
 import ProfileViewDialogContextProvider from "./context/dialog/provider";
 import CardDetailDialog from "./dialog/CardDetailDialog";
 
-export default function ProfileView() {
+export default function EditProfileView() {
   return (
     <ProfileViewDialogContextProvider>
       <CardDetailDialog />

@@ -3,4 +3,5 @@ export const paths = {
   login: "/login",
   register: "/register",
   profile: "/profile",
+  editProfile: "/profile/edit",
 };

@@ -18,6 +18,10 @@ export default function MainLayout({ children }: MainLayoutProps) {
     navigate(paths.profile);
   }, [navigate]);
 
+  const handleProfileEditButtonClick = useCallback(() => {
+    navigate(paths.editProfile);
+  }, [navigate]);
+
   const handleLoginButtonClick = useCallback(() => {
     navigate(paths.login);
   }, [navigate]);
@@ -33,6 +37,9 @@ export default function MainLayout({ children }: MainLayoutProps) {
             </Button>
             <Button variant="link" onClick={handleProfileButtonClick}>
               내 프로필
+            </Button>
+            <Button variant="link" onClick={handleProfileEditButtonClick}>
+              프로필 편집
             </Button>
             <Button variant="link" onClick={handleLoginButtonClick}>
               로그인

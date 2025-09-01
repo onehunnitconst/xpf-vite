@@ -4,6 +4,7 @@ import { paths } from './paths';
 import RegisterPage from './pages/RegisterPage';
 import HomePage from './pages/HomePage';
 import ProfilePage from './pages/ProfilePage';
+import EditProfilePage from './pages/EditProfilePage';
 
 export const router = createBrowserRouter([
   {
@@ -22,4 +23,8 @@ export const router = createBrowserRouter([
     path: paths.profile,
     element: <ProfilePage />,
   },
+  {
+    path: paths.editProfile,
+    element: <EditProfilePage />,
+  }
 ]);
