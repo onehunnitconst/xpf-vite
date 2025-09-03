@@ -36,7 +36,7 @@ export default function BasicProfileSection() {
         </div>
         <div className="flex flex-col gap-2">
           <p className="text-xl font-bold">자기소개</p>
-          <p className="whitespace-pre-wrap">
+          <p className="text-md whitespace-pre-wrap">
             안녕하세요. 뚜루루입니다. 안녕하세요. 뚜루루입니다. 안녕하세요.
             뚜루루입니다. 안녕하세요. 뚜루루입니다. 안녕하세요. 뚜루루입니다.
             안녕하세요. 뚜루루입니다. 안녕하세요. 뚜루루입니다. 안녕하세요.

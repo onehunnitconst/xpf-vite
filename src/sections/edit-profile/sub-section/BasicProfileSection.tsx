@@ -1,5 +1,5 @@
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { CameraIcon, CheckIcon, PencilIcon, XIcon } from "lucide-react";
 import { useCallback, useState } from "react";
 
@@ -13,6 +13,8 @@ export default function BasicProfileSection() {
   );
 
   const [nicknameEditModeOpen, setNicknameEditModeOpen] = useState(false);
+
+  const [bioEditModeOpen, setBioEditModeOpen] = useState(false);
 
   const handleChangeProfileImage = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -50,6 +52,22 @@ export default function BasicProfileSection() {
       setNicknameEditModeOpen(false);
     },
     [setNicknameEditModeOpen]
+  );
+
+  const handleClickBioEditModeOpen = useCallback(
+    (event: React.MouseEvent<HTMLDivElement>) => {
+      event.preventDefault();
+      setBioEditModeOpen(true);
+    },
+    [setBioEditModeOpen]
+  );
+
+  const handleClickBioEditConfirm = useCallback(
+    (event: React.MouseEvent<HTMLDivElement>) => {
+      event.preventDefault();
+      setBioEditModeOpen(false);
+    },
+    [setBioEditModeOpen]
   );
 
   return (
@@ -114,9 +132,9 @@ export default function BasicProfileSection() {
             )}
             {nicknameEditModeOpen && (
               <div className="flex flex-row gap-2 items-center">
-                <Input
+                <input
                   placeholder="닉네임"
-                  className="placeholder:text-2xl font-bold text-2xl w-48 h-10"
+                  className="placeholder:text-2xl border-none focus:outline-none font-bold text-2xl h-10 max-w-24 w-auto"
                 />
                 <div
                   className="hover:bg-gray-200 hover:cursor-pointer rounded-full p-2"
@@ -138,18 +156,44 @@ export default function BasicProfileSection() {
           </div>
         </div>
         <div className="flex flex-col gap-2">
-          <p className="text-xl font-bold">자기소개</p>
-          <p className="whitespace-pre-wrap">
-            안녕하세요. 뚜루루입니다. 안녕하세요. 뚜루루입니다. 안녕하세요.
-            뚜루루입니다. 안녕하세요. 뚜루루입니다. 안녕하세요. 뚜루루입니다.
-            안녕하세요. 뚜루루입니다. 안녕하세요. 뚜루루입니다. 안녕하세요.
-            안녕하세요. 뚜루루입니다. 안녕하세요. 뚜루루입니다. 안녕하세요.
-            뚜루루입니다. 안녕하세요. 뚜루루입니다. 안녕하세요. 뚜루루입니다.
-            안녕하세요. 뚜루루입니다. 안녕하세요. 뚜루루입니다. 안녕하세요.
-            안녕하세요. 뚜루루입니다. 안녕하세요. 뚜루루입니다. 안녕하세요.
-            뚜루루입니다. 안녕하세요. 뚜루루입니다. 안녕하세요. 뚜루루입니다.
-            안녕하세요. 뚜루루입니다. 안녕하세요. 뚜루루입니다. 안녕하세요.
-          </p>
+          <div className="flex flex-row gap-2 items-center h-8">
+            <p className="text-xl font-bold">자기소개</p>
+            {!bioEditModeOpen && (
+              <div
+                className="hover:bg-gray-200 hover:cursor-pointer rounded-full p-2"
+                onClick={handleClickBioEditModeOpen}
+              >
+                <PencilIcon className="w-3 h-3 text-gray-500" />
+              </div>
+            )}
+            {bioEditModeOpen && (
+              <div
+                className="hover:bg-gray-200 hover:cursor-pointer rounded-full p-2"
+                onClick={handleClickBioEditConfirm}
+              >
+                <CheckIcon className="w-4 h-4 text-green-600" />
+              </div>
+            )}
+          </div>
+          {!bioEditModeOpen && (
+            <p className="text-md whitespace-pre-wrap">
+              안녕하세요. 뚜루루입니다. 안녕하세요. 뚜루루입니다. 안녕하세요.
+              뚜루루입니다. 안녕하세요. 뚜루루입니다. 안녕하세요. 뚜루루입니다.
+              안녕하세요. 뚜루루입니다. 안녕하세요. 뚜루루입니다. 안녕하세요.
+              안녕하세요. 뚜루루입니다. 안녕하세요. 뚜루루입니다. 안녕하세요.
+              뚜루루입니다. 안녕하세요. 뚜루루입니다. 안녕하세요. 뚜루루입니다.
+              안녕하세요. 뚜루루입니다. 안녕하세요. 뚜루루입니다. 안녕하세요.
+              안녕하세요. 뚜루루입니다. 안녕하세요. 뚜루루입니다. 안녕하세요.
+              뚜루루입니다. 안녕하세요. 뚜루루입니다. 안녕하세요. 뚜루루입니다.
+              안녕하세요. 뚜루루입니다. 안녕하세요. 뚜루루입니다. 안녕하세요.
+            </p>
+          )}
+          {bioEditModeOpen && (
+            <Textarea
+              placeholder="자기소개"
+              className="w-full h-24 p-2 md:text-md"
+            />
+          )}
         </div>
       </div>
     </div>
