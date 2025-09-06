@@ -3,8 +3,9 @@ import LoginPage from './pages/LoginPage';
 import { paths } from './paths';
 import RegisterPage from './pages/RegisterPage';
 import HomePage from './pages/HomePage';
-import ProfilePage from './pages/ProfilePage';
+import MyProfilePage from './pages/MyProfilePage';
 import EditProfilePage from './pages/EditProfilePage';
+import ProfilePage from './pages/ProfilePage';
 
 export const router = createBrowserRouter([
   {
@@ -20,11 +21,15 @@ export const router = createBrowserRouter([
     element: <RegisterPage />,
   },
   {
-    path: paths.profile,
-    element: <ProfilePage />,
+    path: paths.myProfile,
+    element: <MyProfilePage />,
   },
   {
     path: paths.editProfile,
     element: <EditProfilePage />,
+  },
+  {
+    path: paths.profileByXAccountId,
+    element: <ProfilePage />,
   }
 ]);

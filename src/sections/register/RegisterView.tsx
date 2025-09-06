@@ -1,4 +1,4 @@
-import { useRegister } from "@/api/auth/login";
+import { useRegister } from "@/api/auth/register";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { paths } from "@/paths";

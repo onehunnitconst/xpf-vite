@@ -2,6 +2,7 @@ export const paths = {
   home: "/",
   login: "/login",
   register: "/register",
-  profile: "/profile",
+  myProfile: "/profile/me",
   editProfile: "/profile/edit",
-};
+  profileByXAccountId: "/profile/:xAccountId",
+}
