@@ -20,8 +20,8 @@ export default function HomeView() {
       try {
         await axiosInstance.get(`/profiles/${xAccountId}`);
         navigate(paths.profileByXAccountId.replace(":xAccountId", xAccountId));
-      } catch (error: AxiosError) {
-        const responseData = error.response?.data as { message: string };
+      } catch (error) {
+        const responseData = (error as AxiosError).response?.data as { message: string };
         toast.error(responseData.message);
       }
     },
