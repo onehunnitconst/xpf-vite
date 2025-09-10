@@ -14,10 +14,7 @@ type Props = {
 
 export default function ProfileViewDialogContextProvider({ children }: Props) {
   const cardDetail = useRef<StoreApi<CardDetailDialogStore>>(
-    createDialogStore<CardDetailDialogMetadata>({
-      open: false,
-      metadata: null,
-    })
+    createDialogStore<CardDetailDialogMetadata>()
   );
 
   const value = useMemo(

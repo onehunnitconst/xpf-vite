@@ -5,16 +5,12 @@ import CardDetailDialog from "./dialog/CardDetailDialog";
 import { useGetMyProfile } from "@/api/profile/getMyProfile";
 
 export default function MyProfileView() {
-    const { profile, profileLoaded, profileNotLoaded } = useGetMyProfile();
+  const { profile, profileLoaded, profileNotLoaded } = useGetMyProfile();
     
-    
-
-
   return (
     <ProfileViewDialogContextProvider>
       <CardDetailDialog />
-      <div className="flex flex-col w-full relative">
-
+      <div className="flex flex-col w-full relative mb-12">
         <BasicProfileSection
           profile={profile}
           profileLoaded={profileLoaded}

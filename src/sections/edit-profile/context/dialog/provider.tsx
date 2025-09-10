@@ -1,35 +1,42 @@
 import type React from "react";
 import { useMemo, useRef } from "react";
 import type { StoreApi } from "zustand";
-import type {
-  CardDetailDialogMetadata,
-  CardDetailDialogStore,
-} from "../../store/CardDetailDialogStore";
+import type { CardAddDialogStore } from "../../store/CardAddDialogStore";
+import type { CardEditDialogStore } from "../../store/CardEditDialogStore";
 import { createDialogStore } from "@/stores/dialog-store";
-import { ProfileViewDialogContext } from "./context";
+import { EditProfileViewDialogContext } from "./context";
+import type { CardDeleteDialogStore } from "../../store/CardDeleteDialogStore";
 
 type Props = {
   children: React.ReactNode;
 };
 
-export default function ProfileViewDialogContextProvider({ children }: Props) {
-  const cardDetail = useRef<StoreApi<CardDetailDialogStore>>(
-    createDialogStore<CardDetailDialogMetadata>({
-      open: false,
-      metadata: null,
-    })
+export default function EditProfileViewDialogContextProvider({ children }: Props) {
+  const cardAdd = useRef<StoreApi<CardAddDialogStore>>(
+    createDialogStore()
   );
+
+  const cardEdit = useRef<StoreApi<CardEditDialogStore>>(
+    createDialogStore()
+  );
+
+  const cardDelete = useRef<StoreApi<CardDeleteDialogStore>>(
+    createDialogStore()
+  );
+
 
   const value = useMemo(
     () => ({
-      cardDetail: cardDetail.current,
+      cardAdd: cardAdd.current,
+      cardEdit: cardEdit.current,
+      cardDelete: cardDelete.current,
     }),
-    [cardDetail]
+    [cardAdd, cardEdit, cardDelete]
   );
 
   return (
-    <ProfileViewDialogContext.Provider value={value}>
+    <EditProfileViewDialogContext.Provider value={value}>
       {children}
-    </ProfileViewDialogContext.Provider>
+    </EditProfileViewDialogContext.Provider>
   );
 }

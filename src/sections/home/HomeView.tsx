@@ -30,7 +30,7 @@ export default function HomeView() {
 
   return (
     <MainLayout>
-      <div className="h-full flex flex-col items-center md:justify-center mt-20 md:mt-0">
+      <div className="min-h-screen flex flex-col items-center md:justify-center mt-20 md:mt-0">
         <div className="flex flex-col items-center gap-4 mb-10">
           <div className="flex flex-row gap-2">
             <p className="text-6xl font-bold">XPF</p>

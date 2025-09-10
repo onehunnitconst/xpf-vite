@@ -4,6 +4,7 @@ import useCardDetailDialog from "../context/dialog/hooks";
 import { Skeleton } from "@/components/ui/skeleton";
 import { GalleryHorizontalIcon } from "lucide-react";
 import type { Profile } from "@/types/profile/profile";
+import type { ProfileItem } from "@/types/profile/profile-item";
 
 type Props = {
   profile: Profile;
@@ -15,11 +16,11 @@ export default function CardSection({ profile, profileLoaded, profileNotLoaded }
   const openDialog = useCardDetailDialog((state) => state.openDialog);
 
   const handleClickCard = useCallback(
-    (ev: React.MouseEvent<HTMLDivElement>, itemId: string) => {
+    (ev: React.MouseEvent<HTMLDivElement>, item: ProfileItem) => {
       ev.preventDefault();
 
       if (profileLoaded) {
-        openDialog({ cardId: itemId });
+        openDialog({ item });
       }
     },
     [openDialog, profileLoaded]
@@ -37,15 +38,15 @@ export default function CardSection({ profile, profileLoaded, profileNotLoaded }
             Array.from({ length: 10 }).map((_, index) => (
               <Skeleton key={index} className="w-full h-32 rounded-lg" />
             ))}
-          {profileLoaded && profile.items.length === 0 && (
+          {profileLoaded && profile?.items?.length === 0 && (
             <p className="text-md text-gray-500">아직 카드가 없습니다.</p>
           )}
           {profileLoaded &&
-            profile.items.map((item, index) => (
+            profile?.items?.map((item, index) => (
               <div
                 key={index}
                 className="flex flex-row gap-4 bg-gray-100 rounded-lg p-4 hover:bg-gray-200 hover:cursor-pointer"
-                onClick={(ev) => handleClickCard(ev, item.id.toString())}
+                onClick={(ev) => handleClickCard(ev, item)}
               >
                 <Avatar className="w-24 h-24 rounded-lg">
                   <AvatarImage src={item.itemImageUrl} />

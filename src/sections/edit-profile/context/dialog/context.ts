@@ -1,9 +1,13 @@
 import type { StoreApi } from "zustand";
-import type { CardDetailDialogStore } from "../../store/CardDetailDialogStore";
+import type { CardAddDialogStore } from "../../store/CardAddDialogStore";
+import type { CardEditDialogStore } from "../../store/CardEditDialogStore";
 import { createContext } from "react";
+import type { CardDeleteDialogStore } from "../../store/CardDeleteDialogStore";
 
 type ContextType = {
-  cardDetail: StoreApi<CardDetailDialogStore>;
+  cardAdd: StoreApi<CardAddDialogStore>;
+  cardEdit: StoreApi<CardEditDialogStore>;
+  cardDelete: StoreApi<CardDeleteDialogStore>;
 };
 
-export const ProfileViewDialogContext = createContext({} as ContextType);
+export const EditProfileViewDialogContext = createContext({} as ContextType);

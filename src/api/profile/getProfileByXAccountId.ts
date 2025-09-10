@@ -10,7 +10,7 @@ export function useGetProfileByXAccountId(xAccountId: string) {
     isLoading: profileLoading,
     error: profileError,
   } = useQuery({
-    queryKey: ["profiles", "me"],
+    queryKey: ["profiles", "xAccountId", xAccountId],
     queryFn: () => {
       const accessToken = getAccessToken();
 

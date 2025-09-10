@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { axiosInstance } from "../axios";
-import { getAccessToken } from "@/utils/session-storage";
+import { fetcherWithAuthorization } from "../axios";
 import { useMemo } from "react";
 import type { Profile } from "@/types/profile/profile";
 
@@ -11,20 +10,12 @@ export function useGetMyProfile() {
     error: profileError,
   } = useQuery({
     queryKey: ["profiles", "me"],
-    queryFn: () => {
-      const accessToken = getAccessToken();
-
-      return axiosInstance.get("/profiles/me", {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
-    },
+    queryFn: () => fetcherWithAuthorization("/profiles/me"),
   });
 
   const memoized = useMemo(
     () => ({
-      profile: profile?.data as Profile,
+      profile: profile as Profile,
       profileLoading,
       profileError,
       profileLoaded: !profileLoading && !profileError,

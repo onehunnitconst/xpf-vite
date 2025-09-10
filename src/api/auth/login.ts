@@ -3,6 +3,7 @@ import { axiosInstance } from "../axios";
 import type { LoginRequest } from "@/types/auth/login";
 import { useMemo } from "react";
 import type { AxiosError } from "axios";
+import { setAccessToken, setRefreshToken } from "@/utils/token-manager";
 
 
 export function useLogin({
@@ -18,8 +19,8 @@ export function useLogin({
     onSuccess(response) {
       const { accessToken, refreshToken } = response.data;
 
-      sessionStorage.setItem("accessToken", accessToken);
-      sessionStorage.setItem("refreshToken", refreshToken);
+      setAccessToken(accessToken);
+      setRefreshToken(refreshToken);
 
       onSuccess();
     },

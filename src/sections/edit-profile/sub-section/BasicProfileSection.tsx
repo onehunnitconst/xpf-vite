@@ -1,199 +1,39 @@
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import { Textarea } from "@/components/ui/textarea";
-import { CameraIcon, CheckIcon, PencilIcon, XIcon } from "lucide-react";
-import { useCallback, useState } from "react";
+import type { Profile } from "@/types/profile/profile";
+import NicknameEditor from "../components/NicknameEditor";
+import BioEditor from "../components/BioEditor";
+import XAccountIdEditor from "../components/XAccountIdEditor";
+import ProfileImageEditor from "../components/ProfileImageEditor";
+import HeaderImageEditor from "../components/HeaderImageEditor";
 
-export default function BasicProfileSection() {
-  const handleClickAccount = useCallback(
-    (event: React.MouseEvent<HTMLDivElement>) => {
-      event.preventDefault();
-      window.open("https://x.com/onehunnitconst", "_blank");
-    },
-    []
-  );
+type Props = {
+  profile: Profile;
+  profileLoaded: boolean;
+  profileNotLoaded: boolean;
+};
 
-  const [nicknameEditModeOpen, setNicknameEditModeOpen] = useState(false);
-
-  const [bioEditModeOpen, setBioEditModeOpen] = useState(false);
-
-  const handleChangeProfileImage = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      event.preventDefault();
-      const file = event.target.files?.[0];
-      if (file) {
-        console.log(file);
-      }
-    },
-    []
-  );
-
-  const handleChangeHeaderImage = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      event.preventDefault();
-      const file = event.target.files?.[0];
-      if (file) {
-        console.log(file);
-      }
-    },
-    []
-  );
-
-  const handleClickNicknameEditModeOpen = useCallback(
-    (event: React.MouseEvent<HTMLDivElement>) => {
-      event.preventDefault();
-      setNicknameEditModeOpen(true);
-    },
-    [setNicknameEditModeOpen]
-  );
-
-  const handleClickNicknameEditConfirm = useCallback(
-    (event: React.MouseEvent<HTMLDivElement>) => {
-      event.preventDefault();
-      setNicknameEditModeOpen(false);
-    },
-    [setNicknameEditModeOpen]
-  );
-
-  const handleClickBioEditModeOpen = useCallback(
-    (event: React.MouseEvent<HTMLDivElement>) => {
-      event.preventDefault();
-      setBioEditModeOpen(true);
-    },
-    [setBioEditModeOpen]
-  );
-
-  const handleClickBioEditConfirm = useCallback(
-    (event: React.MouseEvent<HTMLDivElement>) => {
-      event.preventDefault();
-      setBioEditModeOpen(false);
-    },
-    [setBioEditModeOpen]
-  );
-
+export default function BasicProfileSection({ profile }: Props) {
   return (
-    <div className="flex flex-col">
-      <div className="relative">
-        <img
-          src="https://github.com/shadcn.png"
-          alt="profile"
-          className="w-full h-48 object-cover z-1"
-        />
-        <div className="absolute top-0 left-0 w-full h-full bg-gray-900/50 rounded-lg z-2" />
-        <div className="absolute bottom-2 right-2 flex flex-row gap-2 z-3">
-          <input
-            id="header-image-input"
-            type="file"
-            accept="image/*"
-            onChange={handleChangeHeaderImage}
-            className="hidden"
-          />
-          <label htmlFor="header-image-input">
-            <div className="bg-gray-800/65 hover:bg-gray-800/85 rounded-full p-2 hover:cursor-pointer">
-              <CameraIcon className="w-6 h-6 text-gray-100" />
-            </div>
-          </label>
-          <div className="bg-gray-800/65 hover:bg-gray-800/85 rounded-full p-2 hover:cursor-pointer">
-            <XIcon className="w-6 h-6 text-gray-100" />
-          </div>
-        </div>
-      </div>
-
+    <div className="flex flex-col w-full">
+      <HeaderImageEditor
+        profileId={profile?.id}
+        headerImage={profile?.headerImage}
+      />
       <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-2 items-center mt-[-7.5%] px-10">
-          <div className="relative w-28 h-28 rounded-lg border-2">
-            <Avatar className="w-full h-full rounded-lg z-11">
-              <AvatarImage src="https://github.com/shadcn.png" />
-            </Avatar>
-            <div className="absolute top-0 left-0 w-full h-full bg-gray-900/35 rounded-lg z-12" />
-            <input
-              id="profile-image-input"
-              type="file"
-              accept="image/*"
-              onChange={handleChangeProfileImage}
-              className="hidden"
+          <ProfileImageEditor
+            profileId={profile?.id}
+            profileImage={profile?.profileImage}
+          />
+          <div className="flex flex-col items-center">
+            <NicknameEditor value={profile?.nickname} profileId={profile?.id} />
+            <XAccountIdEditor
+              value={profile?.xAccountId}
+              profileId={profile?.id}
             />
-            <label htmlFor="profile-image-input">
-              <div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] bg-gray-800/75 hover:bg-gray-800/85 rounded-full p-2 hover:cursor-pointer z-13">
-                <CameraIcon className="w-6 h-6 text-gray-100" />
-              </div>
-            </label>
-          </div>
-          <div className="flex flex-col gap-1 items-center">
-            {!nicknameEditModeOpen && (
-              <div className="flex flex-row gap-2 items-center my-1">
-                <p className="text-2xl font-bold">뚜루루</p>
-                <div
-                  className="hover:bg-gray-200 hover:cursor-pointer rounded-full p-2"
-                  onClick={handleClickNicknameEditModeOpen}
-                >
-                  <PencilIcon className="w-3 h-3 text-gray-500" />
-                </div>
-              </div>
-            )}
-            {nicknameEditModeOpen && (
-              <div className="flex flex-row gap-2 items-center">
-                <input
-                  placeholder="닉네임"
-                  className="placeholder:text-2xl border-none focus:outline-none font-bold text-2xl h-10 max-w-24 w-auto"
-                />
-                <div
-                  className="hover:bg-gray-200 hover:cursor-pointer rounded-full p-2"
-                  onClick={handleClickNicknameEditConfirm}
-                >
-                  <CheckIcon className="w-4 h-4 text-green-600" />
-                </div>
-              </div>
-            )}
-
-            <div className="px-2 py-1 w-fit rounded-lg bg-gray-100 hover:bg-gray-200 hover:cursor-pointer">
-              <p
-                className="text-sm text-gray-500 "
-                onClick={handleClickAccount}
-              >
-                @onehunnitconst
-              </p>
-            </div>
           </div>
         </div>
-        <div className="flex flex-col gap-2">
-          <div className="flex flex-row gap-2 items-center h-8">
-            <p className="text-xl font-bold">자기소개</p>
-            {!bioEditModeOpen && (
-              <div
-                className="hover:bg-gray-200 hover:cursor-pointer rounded-full p-2"
-                onClick={handleClickBioEditModeOpen}
-              >
-                <PencilIcon className="w-3 h-3 text-gray-500" />
-              </div>
-            )}
-            {bioEditModeOpen && (
-              <div
-                className="hover:bg-gray-200 hover:cursor-pointer rounded-full p-2"
-                onClick={handleClickBioEditConfirm}
-              >
-                <CheckIcon className="w-4 h-4 text-green-600" />
-              </div>
-            )}
-          </div>
-          {!bioEditModeOpen && (
-            <p className="text-md whitespace-pre-wrap">
-              안녕하세요. 뚜루루입니다. 안녕하세요. 뚜루루입니다. 안녕하세요.
-              뚜루루입니다. 안녕하세요. 뚜루루입니다. 안녕하세요. 뚜루루입니다.
-              안녕하세요. 뚜루루입니다. 안녕하세요. 뚜루루입니다. 안녕하세요.
-              안녕하세요. 뚜루루입니다. 안녕하세요. 뚜루루입니다. 안녕하세요.
-              뚜루루입니다. 안녕하세요. 뚜루루입니다. 안녕하세요. 뚜루루입니다.
-              안녕하세요. 뚜루루입니다. 안녕하세요. 뚜루루입니다. 안녕하세요.
-              안녕하세요. 뚜루루입니다. 안녕하세요. 뚜루루입니다. 안녕하세요.
-              뚜루루입니다. 안녕하세요. 뚜루루입니다. 안녕하세요. 뚜루루입니다.
-              안녕하세요. 뚜루루입니다. 안녕하세요. 뚜루루입니다. 안녕하세요.
-            </p>
-          )}
-          {bioEditModeOpen && (
-            <Textarea
-              placeholder="자기소개"
-              className="w-full h-24 p-2 md:text-md"
-            />
-          )}
+        <div className="md:px-0 px-4">
+          <BioEditor value={profile?.bio} profileId={profile?.id} />
         </div>
       </div>
     </div>

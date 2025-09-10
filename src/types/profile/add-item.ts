@@ -1,5 +1,4 @@
-export type ProfileItem = {
-  id: number;
+export type AddItem = {
   itemImageUrl: string;
   title: string;
   summary: string;

@@ -1,28 +1,27 @@
-const ACCESS_TOKEN = "accessToken";
-const REFRESH_TOKEN = "refreshToken";
+import { getCookie, removeCookie, setCookie } from "./cookie";
 
 export function setAccessToken(accessToken: string) {
-  sessionStorage.setItem(ACCESS_TOKEN, accessToken);
+  setCookie("accessToken", accessToken, { expires: 1 });
 }
 
 export function setRefreshToken(refreshToken: string) {
-  sessionStorage.setItem(REFRESH_TOKEN, refreshToken);
+  setCookie("refreshToken", refreshToken, { expires: 7 });
 }
 
 export function getAccessToken() {
-  return sessionStorage.getItem(ACCESS_TOKEN);
+  return getCookie("accessToken");
 }
 
 export function getRefreshToken() {
-  return sessionStorage.getItem(REFRESH_TOKEN);
+  return getCookie("refreshToken");
 }
 
 export function removeAccessToken() {
-  sessionStorage.removeItem(ACCESS_TOKEN);
+  removeCookie("accessToken");
 }
 
 export function removeRefreshToken() {
-  sessionStorage.removeItem(REFRESH_TOKEN);
+  removeCookie("refreshToken");
 }
 
 export function isAccessTokenNotFound() {

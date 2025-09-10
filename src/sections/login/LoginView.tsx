@@ -45,7 +45,7 @@ export default function LoginView() {
   }, [navigate]);
 
   return (
-    <div className="w-full h-full flex justify-center items-center">
+    <div className="w-full h-full flex justify-center md:items-center mt-20 md:mt-0">
       <div className="flex flex-col items-center gap-3">
         <div className="flex flex-row items-center gap-2 mb-4">
           <h2 className="font-bold text-4xl">XPF</h2>

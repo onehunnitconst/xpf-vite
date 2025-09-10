@@ -8,9 +8,13 @@ type Props = {
   profile: Profile;
   profileLoaded: boolean;
   profileNotLoaded: boolean;
-}
+};
 
-export default function BasicProfileSection({ profile, profileLoaded, profileNotLoaded }: Props) {
+export default function BasicProfileSection({
+  profile,
+  profileLoaded,
+  profileNotLoaded,
+}: Props) {
   const handleClickAccount = useCallback(
     (event: React.MouseEvent<HTMLDivElement>) => {
       event.preventDefault();
@@ -24,22 +28,22 @@ export default function BasicProfileSection({ profile, profileLoaded, profileNot
   return (
     <div className="flex flex-col w-full">
       <Avatar className="w-full h-48 rounded-none z-1">
-        <AvatarImage src="" />
+        <AvatarImage src={profile?.headerImage} className="object-cover" />
         <AvatarFallback className="rounded-none bg-gray-100">
           <GalleryVertical className="w-6 h-6 text-gray-400" />
         </AvatarFallback>
       </Avatar>
       <div className="flex flex-col gap-4">
-        <div className="flex flex-col gap-2 items-center sm:mt-[-7.5%] mt-[-10.0%] px-10 z-10">
-          <Avatar className="w-28 h-28 rounded-lg border-2">
-            <AvatarImage src={profile?.profileImage} />
+        <div className="flex flex-col gap-4 items-center sm:mt-[-7.5%] mt-[-10.0%] px-10 z-2">
+          <Avatar className="w-28 h-28 rounded-lg z-1">
+            <AvatarImage src={profile?.profileImage} className="object-cover" />
             <AvatarFallback className="rounded-lg bg-gray-200">
               <UserIcon className="w-6 h-6 text-gray-400" />
             </AvatarFallback>
           </Avatar>
-          <div className="flex flex-col gap-1 items-center">
+          <div className="flex flex-col gap-2 items-center">
             <p className="text-2xl font-bold text-center">
-              {profileLoaded && profile.nickname}
+              {profileLoaded && profile?.nickname}
               {profileNotLoaded && <Skeleton className="w-28 h-7 rounded-lg" />}
             </p>
             <div className="px-2 py-1 w-fit rounded-lg bg-gray-100 hover:bg-gray-200 hover:cursor-pointer">
@@ -58,8 +62,12 @@ export default function BasicProfileSection({ profile, profileLoaded, profileNot
         <div className="flex flex-col gap-2 md:px-0 px-4">
           <p className="text-xl font-bold">자기소개</p>
           <p className="text-md whitespace-pre-wrap">
-            {profileLoaded && profile.bio}
-            {profileLoaded && profile.bio.length === 0 && <span className="text-md text-gray-500">자기소개가 없습니다.</span>}
+            {profileLoaded && profile?.bio}
+            {profileLoaded && profile?.bio?.length === 0 && (
+              <span className="text-md text-gray-500">
+                자기소개가 없습니다.
+              </span>
+            )}
             {profileNotLoaded && (
               <div className="flex flex-col gap-1">
                 {Array.from({ length: 3 }).map((_, index) => (
